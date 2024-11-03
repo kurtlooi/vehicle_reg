@@ -1,0 +1,29 @@
+.legend {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+  }
+  
+  .registered {
+    background-color: #1e90ff;
+  }
+  
+  .deregistered {
+    background-color: #ff7f50;
+  }
+  
