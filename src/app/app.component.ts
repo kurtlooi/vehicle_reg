@@ -5,9 +5,9 @@ import { VehicleCalendarComponent } from './vehicle-calendar/vehicle-calendar.co
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, VehicleCalendarComponent], // Include it in imports
+  imports: [RouterOutlet, VehicleCalendarComponent], 
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'] // Note: it should be `styleUrls` (plural)
+  styleUrls: ['./app.component.scss'] 
 })
 export class AppComponent {
 }

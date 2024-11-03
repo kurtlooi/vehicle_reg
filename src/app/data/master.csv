@@ -1,4 +1,4 @@
-uuid,status,start_date,end_date,time,user_uuid,brand,type
+uuid,status,start_date,end_date,time,user_uuid,brand,type,user_type
 05d4caaf-b9cf-4778-9698-b8a6cae85aa6,REGISTERED,14/11/2022,01/01/2032,16:00:00,75e74cd5-cc8e-4f04-a9c4-1543b79dc7d3,Toyota,5-seat,commercial
 639533fa-532b-4051-a616-15d20a127926,REGISTERED,08/11/2022,01/01/2032,12:00:00,47159c81-f059-4775-a76d-bb531f7ad687,Toyota,5-seat,commercial
 5582d0de-f2d2-468c-94db-5e52f63f18ad,REGISTERED,25/11/2022,01/01/2032,18:30:00,cb6a901d-2411-4031-8061-bd715cfb86d8,Toyota,5-seat,commercial

@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import * as Papa from 'papaparse';
-
 @Injectable({
   providedIn: 'root',
 })
-
 export class DataService {
    getDataFromCsv():any[]  {
 return [
