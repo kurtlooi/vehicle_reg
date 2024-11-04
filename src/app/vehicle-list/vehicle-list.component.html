@@ -1,0 +1,25 @@
+<div class="vehicle-cards">
+  <mat-card *ngFor="let vehicle of paginatedVehicles" 
+            class="vehicle-card" 
+            [ngClass]="vehicle.status === 'REGISTERED' ? 'registered' : 'deregistered'">
+    <mat-card-header>
+      <mat-card-title class="vehicle-title">{{ vehicle.brand }} ({{ vehicle.type }})</mat-card-title>
+      <mat-card-subtitle>Status: {{ vehicle.status }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>UUID:</strong> {{ vehicle.uuid }}</p>
+      <p><strong>User UUID:</strong> {{ vehicle.userUuid }}</p>
+      <p><strong>Start Date:</strong> {{ vehicle.startDate | date: 'mediumDate' }}</p>
+      <p><strong>End Date:</strong> {{ vehicle.endDate | date: 'mediumDate' }}</p>
+      <p><strong>Time:</strong> {{ vehicle.time }}</p>
+      <p><strong>Group:</strong> {{ vehicle.group }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<mat-paginator [length]="vehicles.length"
+               [pageSize]="pageSize"
+               [pageIndex]="currentPage" 
+               [pageSizeOptions]="[5, 10, 25, 50]"
+               (page)="onPageChange($event)">
+</mat-paginator>
