@@ -5,6 +5,7 @@ import { VehicleService } from './vehicle.service';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { FilterPanelComponent } from './filter-panel/filter-panel.component';
 import { Vehicle } from './models/vehicle.model';
+import { VehicleTableComponent } from './vehicle-table/vehicle-table.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -12,6 +13,7 @@ import { Vehicle } from './models/vehicle.model';
     RouterOutlet,
     VehicleCalendarComponent,
     VehicleListComponent,
+    VehicleTableComponent,
     FilterPanelComponent,
   ],
   templateUrl: './app.component.html',

@@ -1,0 +1,25 @@
+.vehicle-table {
+  width: 100%;
+}
+
+tr.registered td:first-child {
+  border-left: 8px solid green; /* Adjust color for registered vehicles */
+}
+
+tr.deregistered td:first-child {
+  border-left: 8px solid red; /* Adjust color for deregistered vehicles */
+}
+
+/* Additional styling for better table appearance */
+.vehicle-table th {
+  font-weight: bold;
+}
+
+.vehicle-table td,
+.vehicle-table th {
+  padding: 16px;
+}
+
+mat-paginator {
+  margin-top: 16px;
+}
