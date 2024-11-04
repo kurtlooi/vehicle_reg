@@ -26,6 +26,7 @@ export class AppComponent {
   vehicles: Vehicle[] = [];
   filteredVehicles: Vehicle[] = [];
   selectedVehicle: Vehicle | null = null;
+  showTable: Boolean = false;
 
   constructor(
     private vehicleService: VehicleService,
@@ -54,5 +55,9 @@ export class AppComponent {
         vehicle.group.toLowerCase() === filter.group.toLowerCase();
       return matchesStatus && matchesType;
     });
+  }
+
+  toggleView() {
+    this.showTable = !this.showTable;
   }
 }

@@ -1,45 +1,44 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CalendarEvent, CalendarModule, CalendarView } from 'angular-calendar';
-import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
+import { Vehicle } from '../models/vehicle.model';
+import { Input } from '@angular/core';
+import { SimpleChanges } from '@angular/core';
+import { VehicleDetailService } from '../vehicle-detail.service';
+
 @Component({
   selector: 'app-vehicle-calendar',
   standalone: true,
   imports: [CommonModule, CalendarModule],
   templateUrl: './vehicle-calendar.component.html',
-  styleUrl: './vehicle-calendar.component.scss'
+  styleUrl: './vehicle-calendar.component.scss',
 })
 export class VehicleCalendarComponent {
-  viewDate: Date = new Date(2022, 10, 15); 
+  viewDate: Date = new Date(2022, 10, 15);
   events: CalendarEvent[] = [];
   view: CalendarView = CalendarView.Month;
   activeDayIsOpen: boolean = false;
-  constructor(private dataService: DataService) {}
+  @Input() vehicles: Vehicle[] = [];
+  constructor(private vehicleDetailService: VehicleDetailService) {}
 
-  async ngOnInit() {
-      const data = this.dataService.getDataFromCsv(); 
-      const transformedData = this.transformData(data);
-      this.events =transformedData
+  ngOnInit() {
+    const data = this.vehicles;
+    const transformedData = this.transformData(data);
+    this.events = transformedData;
   }
-  
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['vehicles']) {
+      this.ngOnInit();
+    }
+  }
+
   transformData(data: any[]): CalendarEvent[] {
     return data.map((item) => {
-      var [day, month, year] = item[2].split('/').map(Number);
-      const start = new Date(year, month - 1, day); // start_date
-      [day, month, year] = item[3].split('/').map(Number);
-      const end = new Date(year, month - 1, day); // start_date
-      const title = `${item[6]} ${item[7]}`; // brand and type
-      const color = this.getStatusColor(item[1]); // status
-      const meta: any = {
-        uuid: item[0], // uuid
-        status: item[1], // status
-        startDate: start, // start_date
-        endDate: end, // end_date
-        time: item[4], // time
-        userUuid: item[5], // user_uuid
-        brand: item[6], // brand
-        type: item[7], // type
-        userType: item[8], // user_type
+      const start = item.startDate;
+      const title = `${item.brand} (${item.type})`; // brand and type
+      const color = this.getStatusColor(item.status); // status
+      const meta: Vehicle = {
+        ...item,
       };
       return {
         start,
@@ -50,7 +49,6 @@ export class VehicleCalendarComponent {
     });
   }
 
-  
   getStatusColor(status: string) {
     switch (status.toUpperCase()) {
       case 'REGISTERED':
@@ -63,14 +61,18 @@ export class VehicleCalendarComponent {
   }
 
   dayClicked(day: any) {
-    if (this.viewDate.getTime()===day.date.getTime()&&this.activeDayIsOpen=== true){
-      this.activeDayIsOpen = false; return
+    if (
+      this.viewDate.getTime() === day.date.getTime() &&
+      this.activeDayIsOpen === true
+    ) {
+      this.activeDayIsOpen = false;
+      return;
     }
-    this.viewDate=new Date(day.date)
+    this.viewDate = new Date(day.date);
     this.activeDayIsOpen = true;
   }
 
   vehClicked(vehicle: any) {
-    console.log(vehicle.event.meta)
+    this.vehicleDetailService.selectVehicle(vehicle.event.meta);
   }
 }

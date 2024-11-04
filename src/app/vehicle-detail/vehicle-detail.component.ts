@@ -5,9 +5,11 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
+
 import { Vehicle } from '../models/vehicle.model';
 import { VehicleDetailService } from '../vehicle-detail.service';
 import { CommonModule } from '@angular/common';
+import { ElementRef } from '@angular/core';
 @Component({
   selector: 'app-vehicle-detail',
   standalone: true,
@@ -20,11 +22,14 @@ export class VehicleDetailComponent implements OnInit, OnChanges {
   isMobileView: boolean = window.innerWidth < 768;
   isVisible: boolean = false;
 
-  constructor(private vehicleDetailService: VehicleDetailService) {}
+  constructor(
+    private vehicleDetailService: VehicleDetailService,
+    private elementRef: ElementRef<HTMLElement>
+  ) {}
 
   ngOnInit(): void {
     // Subscribe to vehicle selection changes
-    this.vehicleDetailService.selectedVehicle$.subscribe((vehicle) => {
+    this.vehicleDetailService.selectedVehicle$.subscribe((vehicle: any) => {
       this.selectedVehicle = vehicle;
       this.isVisible = !!vehicle; // Show the component if a vehicle is selected
     });
@@ -40,6 +45,11 @@ export class VehicleDetailComponent implements OnInit, OnChanges {
   closeDetail() {
     this.vehicleDetailService.clearSelection(); // Clear vehicle selection in service
     this.isVisible = false; // Hide the detail component
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  handleEsc(event: Event) {
+    this.closeDetail();
   }
 
   @HostListener('window:resize', ['$event'])

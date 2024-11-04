@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Vehicle } from '../models/vehicle.model';
 import { VehicleDetailService } from '../vehicle-detail.service';
+import { MatSortModule, MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-vehicle-table',
@@ -22,11 +23,13 @@ import { VehicleDetailService } from '../vehicle-detail.service';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSortModule,
   ],
 })
 export class VehicleTableComponent implements OnInit, OnChanges {
   @Input() vehicles: Vehicle[] = [];
   dataSource = new MatTableDataSource<Vehicle>();
+  @ViewChild('empTbSort') empTbSort = new MatSort();
 
   constructor(private vehicleDetailService: VehicleDetailService) {}
 
@@ -45,6 +48,24 @@ export class VehicleTableComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.updateTableData(this.vehicles);
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.empTbSort;
+    this.dataSource.sortingDataAccessor = (
+      data: Vehicle,
+      sortHeaderId: string
+    ): string | number => {
+      switch (sortHeaderId) {
+        case 'startDate':
+          return data.startDate.getTime();
+        case 'endDate':
+          return data.endDate.getTime();
+        default:
+          return (data as any)[sortHeaderId] as string | number;
+      }
+    };
   }
 
   ngOnChanges(): void {

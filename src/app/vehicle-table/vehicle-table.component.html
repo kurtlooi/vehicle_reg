@@ -1,19 +1,20 @@
 <div class="vehicle-table">
-  <!-- Filter Input -->
-  <mat-form-field appearance="outline" class="filter-field">
-    <mat-label>Filter vehicles</mat-label>
-    <input matInput (input)="applyFilter($any($event.target).value)">
-  </mat-form-field>
-
-  <table mat-table [dataSource]="dataSource" class="vehicle-table">
+  <table mat-table [dataSource]="dataSource" class="vehicle-table" matSort #empTbSort="matSort">
     <!-- Define each column here based on the `displayedColumns` array -->
     <ng-container *ngFor="let column of columns" [matColumnDef]="column.key">
-      <th mat-header-cell *matHeaderCellDef>{{ column.label }}</th>
-      <td mat-cell *matCellDef="let vehicle" [attr.data-status]="vehicle.status" (click)="onVehicleSelect(vehicle)">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="{{ column.key }}">
+        {{ column.label }}
+      </th>
+      <td
+        mat-cell
+        *matCellDef="let vehicle"
+        [attr.data-status]="vehicle.status"
+        (click)="onVehicleSelect(vehicle)"
+      >
         {{ vehicle[column.key] }}
       </td>
     </ng-container>
-  
+
     <!-- Header and Row Definitions -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr
@@ -24,5 +25,9 @@
     ></tr>
   </table>
   <!-- Pagination -->
-  <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
+  <mat-paginator
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25, 50, 200, 500]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>
