@@ -29,11 +29,12 @@ export class FilterPanelComponent implements OnInit {
     status: string;
     group: string;
   }>();
-
+  @Output() showTable = new EventEmitter<boolean>();
   statusOptions: string[] = ['All', 'Registered', 'Deregistered'];
-  groupOptions: string[] = ['All', 'personal', 'commercial'];
+  groupOptions: string[] = ['All', 'Personal', 'Commercial'];
   selectedStatus = 'All';
   selectedGroup = 'All';
+  showTableVal = false;
 
   typeControl = new FormControl('');
   filteredTypes: Observable<string[]> = of([]);
@@ -45,5 +46,9 @@ export class FilterPanelComponent implements OnInit {
       status: this.selectedStatus,
       group: this.selectedGroup,
     });
+  }
+  toggleView() {
+    this.showTableVal = !this.showTableVal;
+    this.showTable.emit(this.showTableVal);
   }
 }

@@ -32,7 +32,7 @@ export class AppComponent {
     private vehicleService: VehicleService,
     private vehicleDetailService: VehicleDetailService
   ) {
-    this.vehicleService.vehicleData$.subscribe((data) => {
+    this.vehicleService.vehicleData$.subscribe((data: Vehicle[]) => {
       this.vehicles = data;
       this.filteredVehicles = data;
     });
@@ -40,9 +40,11 @@ export class AppComponent {
 
   ngOnInit() {
     // Subscribe to the selected vehicle changes
-    this.vehicleDetailService.selectedVehicle$.subscribe((vehicle) => {
-      this.selectedVehicle = vehicle; // Update the selected vehicle
-    });
+    this.vehicleDetailService.selectedVehicle$.subscribe(
+      (vehicle: Vehicle | null) => {
+        this.selectedVehicle = vehicle; // Update the selected vehicle
+      }
+    );
   }
 
   applyFilter(filter: { status: string; group: string }) {
@@ -56,8 +58,7 @@ export class AppComponent {
       return matchesStatus && matchesType;
     });
   }
-
-  toggleView() {
-    this.showTable = !this.showTable;
-  }
+applyView(showTable: boolean) {
+  this.showTable = showTable;
+}
 }

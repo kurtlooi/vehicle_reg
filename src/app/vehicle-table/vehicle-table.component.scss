@@ -3,11 +3,11 @@
 }
 
 tr.registered td:first-child {
-  border-left: 8px solid green; /* Adjust color for registered vehicles */
+  border-left: 8px solid #1e90ff; /* Adjust color for registered vehicles */
 }
 
 tr.deregistered td:first-child {
-  border-left: 8px solid red; /* Adjust color for deregistered vehicles */
+  border-left: 8px solid #ff7f50; /* Adjust color for deregistered vehicles */
 }
 
 /* Additional styling for better table appearance */
