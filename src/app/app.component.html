@@ -1,7 +1,10 @@
 <!-- <app-vehicle-calendar></app-vehicle-calendar> -->
 <!-- <app-vehicle-management-test></app-vehicle-management-test> -->
 <app-filter-panel (filterChange)="applyFilter($event)"></app-filter-panel>
-<app-vehicle-list [vehicles]="filteredVehicles"></app-vehicle-list>
+<!-- <app-vehicle-list [vehicles]="filteredVehicles"></app-vehicle-list> -->
+<app-vehicle-table [vehicles]="filteredVehicles"></app-vehicle-table>
+<app-vehicle-detail></app-vehicle-detail>
+
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->

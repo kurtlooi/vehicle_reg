@@ -1,7 +1,8 @@
 <div class="vehicle-cards">
   <mat-card *ngFor="let vehicle of paginatedVehicles" 
             class="vehicle-card" 
-            [ngClass]="vehicle.status === 'REGISTERED' ? 'registered' : 'deregistered'">
+            [ngClass]="vehicle.status === 'REGISTERED' ? 'registered' : 'deregistered'"
+            (click)="onVehicleSelect(vehicle)">
     <mat-card-header>
       <mat-card-title class="vehicle-title">{{ vehicle.brand }} ({{ vehicle.type }})</mat-card-title>
       <mat-card-subtitle>Status: {{ vehicle.status }}</mat-card-subtitle>

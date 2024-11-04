@@ -1,0 +1,16 @@
+<div *ngIf="isVisible && selectedVehicle" 
+     class="vehicle-detail" 
+     [ngClass]="{ 'mobile-view': isMobileView, 'desktop-view': !isMobileView }">
+  <button class="close-button" (click)="closeDetail()">✖</button>
+  <h2>Vehicle Details</h2>
+  <div class="detail-content">
+    <p><strong>Brand:</strong> {{ selectedVehicle?.brand }}</p>
+    <p><strong>Type:</strong> {{ selectedVehicle?.type }}</p>
+    <p><strong>Status:</strong> {{ selectedVehicle?.status }}</p>
+    <p><strong>UUID:</strong> {{ selectedVehicle?.uuid }}</p>
+    <p><strong>User UUID:</strong> {{ selectedVehicle?.userUuid }}</p>
+    <p><strong>Start Date:</strong> {{ selectedVehicle?.startDate | date: 'mediumDate' }}</p>
+    <p><strong>End Date:</strong> {{ selectedVehicle?.endDate | date: 'mediumDate' }}</p>
+    <p><strong>Time:</strong> {{ selectedVehicle?.time }}</p>
+  </div>
+</div>

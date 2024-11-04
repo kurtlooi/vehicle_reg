@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginator } from '@angular/material/paginator';
 import { Vehicle } from '../models/vehicle.model';
+import { VehicleDetailService } from '../vehicle-detail.service';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -22,6 +23,8 @@ export class VehicleListComponent implements OnInit, OnChanges {
   paginatedVehicles: Vehicle[] = [];
   currentPage: number = 0;
   pageSize: number = 10; // Number of vehicles to display per page
+
+  constructor(private vehicleDetailService: VehicleDetailService) {}
 
   ngOnInit() {
     this.updatePaginatedVehicles(); // Initialize paginated vehicles
@@ -48,5 +51,9 @@ export class VehicleListComponent implements OnInit, OnChanges {
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
     this.updatePaginatedVehicles(); // Update the displayed vehicles on page change
+  }
+
+  onVehicleSelect(vehicle: Vehicle) {
+    this.vehicleDetailService.selectVehicle(vehicle);
   }
 }

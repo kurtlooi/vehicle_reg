@@ -7,10 +7,10 @@
 
   <table mat-table [dataSource]="dataSource" class="vehicle-table">
     <!-- Define each column here based on the `displayedColumns` array -->
-    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-      <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-      <td mat-cell *matCellDef="let vehicle" [attr.data-status]="vehicle.status">
-        {{ vehicle[column] }}
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.key">
+      <th mat-header-cell *matHeaderCellDef>{{ column.label }}</th>
+      <td mat-cell *matCellDef="let vehicle" [attr.data-status]="vehicle.status" (click)="onVehicleSelect(vehicle)">
+        {{ vehicle[column.key] }}
       </td>
     </ng-container>
   

@@ -6,6 +6,8 @@ import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { FilterPanelComponent } from './filter-panel/filter-panel.component';
 import { Vehicle } from './models/vehicle.model';
 import { VehicleTableComponent } from './vehicle-table/vehicle-table.component';
+import { VehicleDetailService } from './vehicle-detail.service';
+import { VehicleDetailComponent } from './vehicle-detail/vehicle-detail.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -14,6 +16,7 @@ import { VehicleTableComponent } from './vehicle-table/vehicle-table.component';
     VehicleCalendarComponent,
     VehicleListComponent,
     VehicleTableComponent,
+    VehicleDetailComponent,
     FilterPanelComponent,
   ],
   templateUrl: './app.component.html',
@@ -22,11 +25,22 @@ import { VehicleTableComponent } from './vehicle-table/vehicle-table.component';
 export class AppComponent {
   vehicles: Vehicle[] = [];
   filteredVehicles: Vehicle[] = [];
+  selectedVehicle: Vehicle | null = null;
 
-  constructor(private vehicleService: VehicleService) {
+  constructor(
+    private vehicleService: VehicleService,
+    private vehicleDetailService: VehicleDetailService
+  ) {
     this.vehicleService.vehicleData$.subscribe((data) => {
       this.vehicles = data;
       this.filteredVehicles = data;
+    });
+  }
+
+  ngOnInit() {
+    // Subscribe to the selected vehicle changes
+    this.vehicleDetailService.selectedVehicle$.subscribe((vehicle) => {
+      this.selectedVehicle = vehicle; // Update the selected vehicle
     });
   }
 

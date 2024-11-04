@@ -1,0 +1,45 @@
+.vehicle-detail {
+  position: fixed;
+  background: #f8f8f8;
+  padding: 16px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-height: 80vh;
+  overflow-y: auto;
+  transition: all 0.3s ease-in-out;
+
+  &.desktop-view {
+    width: 30%;
+    left: 35%;
+    top: 0;
+    bottom: 0;
+  }
+
+  &.mobile-view {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+  }
+
+  .close-button {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
+  h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #333;
+  }
+
+  .detail-content {
+    p {
+      margin: 8px 0;
+    }
+  }
+}

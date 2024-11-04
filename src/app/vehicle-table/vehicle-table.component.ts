@@ -9,6 +9,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Vehicle } from '../models/vehicle.model';
+import { VehicleDetailService } from '../vehicle-detail.service';
 
 @Component({
   selector: 'app-vehicle-table',
@@ -26,6 +27,8 @@ import { Vehicle } from '../models/vehicle.model';
 export class VehicleTableComponent implements OnInit, OnChanges {
   @Input() vehicles: Vehicle[] = [];
   dataSource = new MatTableDataSource<Vehicle>();
+
+  constructor(private vehicleDetailService: VehicleDetailService) {}
 
   columns = [
     { key: 'uuid', label: 'UUID' },
@@ -62,5 +65,13 @@ export class VehicleTableComponent implements OnInit, OnChanges {
 
   get displayedColumns(): string[] {
     return this.columns.map((col) => col.key);
+  }
+
+  get displayedColumnNames(): string[] {
+    return this.columns.map((col) => col.label);
+  }
+
+  onVehicleSelect(vehicle: Vehicle) {
+    this.vehicleDetailService.selectVehicle(vehicle);
   }
 }
